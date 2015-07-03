@@ -82,32 +82,32 @@ public class ProfilesAdapter extends BaseAdapter{
             view = (ProfilesViewHolder) convertView.getTag();
         }
 
-        /* Picasso */
+        /* Picasso with url*/
         //Picasso.with(context).load("url").into(imageView);
 
         Resources res = context.getResources();
 
-        view.tv_firstName.setText(res.getString(R.string.tv_firstName)+" "+getItem(position).getFirstName().toString());
-        view.tv_lastName.setText(res.getString(R.string.tv_lastName)+" "+getItem(position).getLastName().toString());
+        view.tv_firstName.setText(res.getString(R.string.tv_firstName)+" "+profiles.get(position).getFirstName().toString());
+        view.tv_lastName.setText(res.getString(R.string.tv_lastName)+" "+profiles.get(position).getLastName().toString());
 
-        if(getItem(position).getGender().toString().equals("M")){
+        if(profiles.get(position).getGender().toString().equals("M")){
             view.tv_gender.setText(res.getString(R.string.tv_gender)+" "+res.getString(R.string.tv_genre_m));
         }else if(profiles.get(position).getGender().toString().equals("F")){
             view.tv_gender.setText(res.getString(R.string.tv_gender)+" "+res.getString(R.string.tv_genre_f));
         }
-        if(getItem(position).getSurveyHandedness().toString().equals("R")){
+        if(profiles.get(position).getSurveyHandedness().toString().equals("R")){
             view.tv_handed.setText(res.getString(R.string.tv_handed)+" "+res.getString(R.string.tv_handed_d));
         }else if(profiles.get(position).getSurveyHandedness().toString().equals("L")){
             view.tv_handed.setText(res.getString(R.string.tv_handed)+" "+res.getString(R.string.tv_handed_g));
         }
-        String strDate = getDate(getItem(position).getBirthday().toString());
+        String strDate = getDate(profiles.get(position).getBirthday().toString());
         view.tv_birthday.setText(res.getString(R.string.tv_birthday)+" "+strDate);
 
-        strDate = getDate(getItem(position).getStats().getLastBrushing().toString());
+        strDate = getDate(profiles.get(position).getStats().getLastBrushing().toString());
         view.tv_lastBrushing.setText(res.getString(R.string.tv_lastBrushing)+" "+strDate);
 
-        view.tv_allBrushingTime.setText(res.getString(R.string.tv_allBrushingTime)+" "+getItem(position).getStats().getAllBrushingTime().toString());
-        view.tv_totalVisite.setText(res.getString(R.string.tv_totalVisite)+" "+getItem(position).getStats().getTotalVisit().toString());
+        view.tv_allBrushingTime.setText(res.getString(R.string.tv_allBrushingTime)+" "+profiles.get(position).getStats().getAllBrushingTime().toString());
+        view.tv_totalVisite.setText(res.getString(R.string.tv_totalVisite)+" "+profiles.get(position).getStats().getTotalVisit().toString());
 
 
         return convertView;
