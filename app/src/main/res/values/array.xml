@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender">
+        <item>Masculin</item>
+        <item>Féminin</item>
+    </string-array>
+    <string-array name="handed">
+        <item>Droitier</item>
+        <item>Gaucher</item>
+    </string-array>
+</resources>

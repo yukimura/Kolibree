@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.javacodegeeks.android.loginapp.MainActivity"
+    android:background="@drawable/kolibree">
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imgProfile"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Email"
+        android:textColor="@color/blue_kolibree"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_email"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@+id/tv_email"
+        android:text="android.test@kolibree.com"
+        android:textColor="@color/blue_kolibree">
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:layout_alignLeft="@+id/tv_email"
+        android:layout_below="@+id/tv_email"
+        android:layout_marginTop="40dp"
+        android:text="Password"
+        android:textColor="@color/blue_kolibree"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_password"
+        android:layout_alignLeft="@+id/et_email"
+        android:layout_alignRight="@+id/et_email"
+        android:text="test"
+        android:textColor="@color/blue_kolibree"
+        android:inputType="textPassword" />
+
+    <ProgressBar
+        android:id="@+id/indeterminate_progress_large_library"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:indeterminate="true"
+        android:layout_below="@+id/et_password"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/et_email"
+        android:layout_alignRight="@+id/et_email"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Large" />
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/et_password"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/et_email"
+        android:layout_alignRight="@+id/et_email"
+        android:layout_marginTop="40dp"
+        android:onClick="authenticateLogin"
+        android:text="Connection"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>

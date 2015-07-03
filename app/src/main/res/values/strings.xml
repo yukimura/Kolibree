@@ -1,0 +1,46 @@
+<resources>
+
+    <string name="base_url">https://test.api.kolibree.com</string>
+    <string name="secret">X7doOhLCRbuT0FIgBsmy</string>
+    <string name="message_account">https://test.api.kolibree.com/v1/accounts/request_token/</string>
+    <string name="message_profile">https://test.api.kolibree.com/v1/accounts/{account_id}/profiles/</string>
+    <string name="sha256_HMAC">HmacSHA256</string>
+    <string name="header_id">http-x-client-id</string>
+    <string name="header_sig">http-x-client-sig</string>
+    <string name="header_accessToken">http-x-access-token</string>
+
+    <string name="app_name">Kolibree</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open"/>
+    <string name="navigation_drawer_close"/>
+    <string name="drawer_item_listening">Home</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="action_example">Example action</string>
+    <string name="bt_account">Connect</string>
+
+    <string name="tv_title_infoProfile">Info profile</string>
+    <string name="tv_title_statProfile">Statistique</string>
+
+    <string name="tv_firstName">Prénom:</string>
+    <string name="tv_lastName">Nom:</string>
+    <string name="tv_gender">Genre:</string>
+    <string name="tv_birthday">Anniversaire:</string>
+    <string name="tv_lastBrushing">Dernier Brossage:</string>
+    <string name="tv_allBrushingTime">Temps total de brossage:</string>
+    <string name="tv_totalVisite">Total de visite:</string>
+
+    <string name="tv_genre_m">Masculin</string>
+    <string name="tv_genre_f">Féminin</string>
+    <string name="tv_handed_d">Droitier</string>
+    <string name="tv_handed_g">Gaucher</string>
+</resources>
