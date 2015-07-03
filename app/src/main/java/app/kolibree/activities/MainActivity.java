@@ -1,7 +1,10 @@
 package app.kolibree.activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // create menu items;
         itemProfile = new ResideMenuItem(this, R.drawable.ic_home_yellow_36dp, "Profiles");
         itemAddProfile = new ResideMenuItem(this, R.drawable.ic_add_yellow_36dp, "Add Profile");
-        itemClose = new ResideMenuItem(this, R.drawable.ic_highlight_off_yellow_24dp, "Close");
+        itemClose = new ResideMenuItem(this, R.drawable.ic_highlight_off_yellow_24dp, "Log out");
 
         itemProfile.setOnClickListener(this);
         itemAddProfile.setOnClickListener(this);
@@ -103,7 +106,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if (view == itemAddProfile) {
             onCurrentFragment(1);
         }else if (view == itemClose) {
-            finish();
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor user = preferences.edit();
+            user.clear();
+            Intent intent = new Intent(MainActivity.this, AccountActivity.class);
+            startActivity(intent);
         }
 
         resideMenu.closeMenu();
