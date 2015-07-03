@@ -51,6 +51,7 @@ public class ProfilesAdapter extends BaseAdapter{
         public TextView tv_firstName;
         public TextView tv_lastName;
         public TextView tv_gender;
+        public TextView tv_handed;
         public TextView tv_birthday;
         public TextView tv_lastBrushing;
         public TextView tv_allBrushingTime;
@@ -69,6 +70,7 @@ public class ProfilesAdapter extends BaseAdapter{
             view.tv_firstName = (TextView) convertView.findViewById(R.id.tv_firstName);
             view.tv_lastName = (TextView) convertView.findViewById(R.id.tv_lastName);
             view.tv_gender = (TextView) convertView.findViewById(R.id.tv_gender);
+            view.tv_handed = (TextView) convertView.findViewById(R.id.tv_handed);
             view.tv_birthday = (TextView) convertView.findViewById(R.id.tv_birthday);
             view.tv_lastBrushing = (TextView) convertView.findViewById(R.id.tv_lastBrushing);
             view.tv_allBrushingTime = (TextView) convertView.findViewById(R.id.tv_allBrushingTime);
@@ -80,7 +82,8 @@ public class ProfilesAdapter extends BaseAdapter{
             view = (ProfilesViewHolder) convertView.getTag();
         }
 
-        /* Picasso pour url image */
+        /* Picasso */
+        //Picasso.with(context).load("url").into(imageView);
 
         Resources res = context.getResources();
 
@@ -91,6 +94,11 @@ public class ProfilesAdapter extends BaseAdapter{
             view.tv_gender.setText(res.getString(R.string.tv_gender)+" "+res.getString(R.string.tv_genre_m));
         }else if(profiles.get(position).getGender().toString().equals("F")){
             view.tv_gender.setText(res.getString(R.string.tv_gender)+" "+res.getString(R.string.tv_genre_f));
+        }
+        if(getItem(position).getSurveyHandedness().toString().equals("R")){
+            view.tv_handed.setText(res.getString(R.string.tv_handed)+" "+res.getString(R.string.tv_handed_d));
+        }else if(profiles.get(position).getSurveyHandedness().toString().equals("L")){
+            view.tv_handed.setText(res.getString(R.string.tv_handed)+" "+res.getString(R.string.tv_handed_g));
         }
         String strDate = getDate(getItem(position).getBirthday().toString());
         view.tv_birthday.setText(res.getString(R.string.tv_birthday)+" "+strDate);

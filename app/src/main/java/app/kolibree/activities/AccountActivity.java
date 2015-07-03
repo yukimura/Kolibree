@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedByteArray;
@@ -52,10 +51,9 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
 
     private void getAppInfos()
     {
-        JsonObject jsonObject = getCheckJsonObject();
+        KOLIBREEAPI service = Common.create(KOLIBREEAPI.class).build(this, null, 0);
 
-        RestAdapter restAdapter = Common.getRestAdapter(this, null, 0);
-        KOLIBREEAPI service = restAdapter.create(KOLIBREEAPI.class);
+        JsonObject jsonObject = getCheckJsonObject();
 
         service.getAccount(jsonObject, new Callback<Account>() {
 

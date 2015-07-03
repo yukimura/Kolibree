@@ -34,6 +34,7 @@
     <string name="tv_firstName">Prénom:</string>
     <string name="tv_lastName">Nom:</string>
     <string name="tv_gender">Genre:</string>
+    <string name="tv_handed">Main:</string>
     <string name="tv_birthday">Anniversaire:</string>
     <string name="tv_lastBrushing">Dernier Brossage:</string>
     <string name="tv_allBrushingTime">Temps total de brossage:</string>

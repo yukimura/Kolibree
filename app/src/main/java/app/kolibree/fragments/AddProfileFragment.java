@@ -33,7 +33,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedByteArray;
@@ -132,10 +131,9 @@ public class AddProfileFragment extends Fragment implements View.OnClickListener
                 bt_add_profile.setVisibility(View.GONE);
                 indeterminateProgressLarge.setVisibility(View.VISIBLE);
 
-                JsonObject jsonObject = getCheckJsonObject();
+                KOLIBREEAPI service = Common.create(KOLIBREEAPI.class).build(getActivity(), account.getAccessToken().toString(), account.getId());
 
-                RestAdapter restAdapter = Common.getRestAdapter(getActivity(), account.getAccessToken().toString(), account.getId());
-                KOLIBREEAPI service = restAdapter.create(KOLIBREEAPI.class);
+                JsonObject jsonObject = getCheckJsonObject();
 
                 service.createProfile(jsonObject, account.getId(), new Callback<Account>() {
 
@@ -163,12 +161,11 @@ public class AddProfileFragment extends Fragment implements View.OnClickListener
         String email = preferences.getString("email", null);
         String password = preferences.getString("password", null);
 
+        KOLIBREEAPI service = Common.create(KOLIBREEAPI.class).build(getActivity(), null, 0);
+
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("email", email);
         jsonObject.addProperty("password", password);
-
-        RestAdapter restAdapter = Common.getRestAdapter(getActivity(), null, 0);
-        KOLIBREEAPI service = restAdapter.create(KOLIBREEAPI.class);
 
         service.getAccount(jsonObject, new Callback<Account>() {
 

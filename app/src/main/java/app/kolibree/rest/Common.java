@@ -5,12 +5,18 @@ import android.util.Base64;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import app.kolibree.R;
+import app.kolibree.deserializers.AccountDeserializer;
+import app.kolibree.models.Account;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
@@ -19,9 +25,23 @@ import retrofit.converter.GsonConverter;
 /**
  * Created by Lapinou on 03/07/2015.
  */
-public class Common {
+public class Common<S> {
 
-    private static String getSignature(Context context, int id){
+    private final Class<S> common;
+
+    public Common(Class<S> common)
+    {
+        this.common = common;
+    }
+
+    public static <S> Common<S> create(Class<S> common)
+    {
+        return new Common<>(common);
+    }
+
+    public S build(final Context context, final String access_token, int id)
+    {
+        // Signature
         String secret = context.getString(R.string.secret);
         String message = null;
         if(id == 0){
@@ -42,16 +62,28 @@ public class Common {
         catch (Exception e){
             System.out.println("Error");
         }
-        return signature;
-    }
 
-    public static RestAdapter getRestAdapter(final Context context, final String access_token, int id) {
-        final String signature = getSignature(context, id);
+        // Cache
+        int cacheSize = 10 * 1024 * 1024; // 10 MiB
+        File cacheDirectory = new File(context.getCacheDir().getAbsolutePath(), "HttpCache");
+        Cache cache = null;
+        cache = new Cache(cacheDirectory, cacheSize);
 
-        final OkHttpClient okHttpClient = new OkHttpClient();
+        // HttpClient
+        OkHttpClient okHttpClient = new OkHttpClient();
+        if (cache != null) {
+            okHttpClient.setCache(cache);
+        }
+        okHttpClient.setConnectTimeout(0, TimeUnit.SECONDS);
+        okHttpClient.setReadTimeout(0, TimeUnit.SECONDS);
 
-        Gson gson = new GsonBuilder().create();
+        // Gson
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Account.class, new AccountDeserializer())
+                .create();
 
+        // RestAdapter
+        final String finalSignature = signature;
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(context.getString(R.string.base_url))
                 .setClient(new OkClient(new OkHttpClient()))
                 .setLogLevel(RestAdapter.LogLevel.BASIC)
@@ -62,14 +94,14 @@ public class Common {
                     public void intercept(RequestFacade request) {
                         request.addHeader("Content-Type", "application/json");
                         request.addHeader(context.getString(R.string.header_id), "5");
-                        request.addHeader(context.getString(R.string.header_sig), signature);
-                        if(access_token != null){
+                        request.addHeader(context.getString(R.string.header_sig), finalSignature);
+                        if (access_token != null) {
                             request.addHeader(context.getString(R.string.header_accessToken), access_token);
                         }
                     }
                 })
                 .build();
 
-        return restAdapter;
+        return restAdapter.create(common);
     }
 }
