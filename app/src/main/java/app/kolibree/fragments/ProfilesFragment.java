@@ -5,10 +5,12 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.dk.view.folder.ResideMenu;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -22,8 +24,8 @@ import butterknife.InjectView;
 
 public class ProfilesFragment extends Fragment implements View.OnClickListener {
 
-    @InjectView(R.id.lv_profiles)
-    ListView lv_profiles;
+    @InjectView(R.id.profilesRecyclerView)
+    RecyclerView profilesRecyclerView;
     @InjectView(R.id.setter_drawable)
     FloatingActionButton setter_drawable;
     private ProfilesAdapter profilesAdapter;
@@ -83,12 +85,15 @@ public class ProfilesFragment extends Fragment implements View.OnClickListener {
         {
             account = b.getParcelable("account");
         }
-        setupForm(view);
+        setupForm();
     }
 
-    protected void setupForm(View view) {
+    protected void setupForm() {
         profilesAdapter = new ProfilesAdapter(getActivity(), account.getProfiles());
-        lv_profiles.setAdapter(profilesAdapter);
+        profilesRecyclerView.setHasFixedSize(true);
+        profilesRecyclerView.setAdapter(profilesAdapter);
+        profilesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        profilesRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     @Override
@@ -109,7 +114,7 @@ public class ProfilesFragment extends Fragment implements View.OnClickListener {
                                 .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                     }
-                }, 600);
+                }, HANDLER_TIME_OUT);
                 break;
         }
     }
