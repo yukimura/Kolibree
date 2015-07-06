@@ -17,7 +17,7 @@ import com.google.gson.JsonObject;
 import app.kolibree.R;
 import app.kolibree.interfaces.KOLIBREEAPI;
 import app.kolibree.models.Account;
-import app.kolibree.rest.Common;
+import app.kolibree.rest.ApiRestServices;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
@@ -51,7 +51,7 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
 
     private void getAppInfos()
     {
-        KOLIBREEAPI service = Common.create(KOLIBREEAPI.class).build(this, null, 0);
+        KOLIBREEAPI service = ApiRestServices.create(KOLIBREEAPI.class).build(this, null, 0);
 
         JsonObject jsonObject = getCheckJsonObject();
 

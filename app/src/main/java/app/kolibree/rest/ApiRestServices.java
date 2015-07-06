@@ -25,18 +25,18 @@ import retrofit.converter.GsonConverter;
 /**
  * Created by Lapinou on 03/07/2015.
  */
-public class Common<S> {
+public class ApiRestServices<S> {
 
     private final Class<S> common;
 
-    public Common(Class<S> common)
+    public ApiRestServices(Class<S> common)
     {
         this.common = common;
     }
 
-    public static <S> Common<S> create(Class<S> common)
+    public static <S> ApiRestServices<S> create(Class<S> common)
     {
-        return new Common<>(common);
+        return new ApiRestServices<>(common);
     }
 
     public S build(final Context context, final String access_token, int id)

@@ -27,7 +27,7 @@ import app.kolibree.R;
 import app.kolibree.activities.MainActivity;
 import app.kolibree.interfaces.KOLIBREEAPI;
 import app.kolibree.models.Account;
-import app.kolibree.rest.Common;
+import app.kolibree.rest.ApiRestServices;
 import app.kolibree.utils.DateUtils;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -131,7 +131,7 @@ public class AddProfileFragment extends Fragment implements View.OnClickListener
                 bt_add_profile.setVisibility(View.GONE);
                 indeterminateProgressLarge.setVisibility(View.VISIBLE);
 
-                KOLIBREEAPI service = Common.create(KOLIBREEAPI.class).build(getActivity(), account.getAccessToken().toString(), account.getId());
+                KOLIBREEAPI service = ApiRestServices.create(KOLIBREEAPI.class).build(getActivity(), account.getAccessToken().toString(), account.getId());
 
                 JsonObject jsonObject = getCheckJsonObject();
 
@@ -161,7 +161,7 @@ public class AddProfileFragment extends Fragment implements View.OnClickListener
         String email = preferences.getString("email", null);
         String password = preferences.getString("password", null);
 
-        KOLIBREEAPI service = Common.create(KOLIBREEAPI.class).build(getActivity(), null, 0);
+        KOLIBREEAPI service = ApiRestServices.create(KOLIBREEAPI.class).build(getActivity(), null, 0);
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("email", email);
